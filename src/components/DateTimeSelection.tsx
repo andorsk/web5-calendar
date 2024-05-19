@@ -6,7 +6,7 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./index.css";
-import { EventType, SlotConfig } from "../types";
+import { EventType, CalendarEvent, SlotConfig } from "../types";
 import {
   FormControl,
   InputLabel,
@@ -14,6 +14,7 @@ import {
   MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
+import BookSlotForm from "./BookSlotForm";
 
 const locales = {
   "en-US": require("date-fns/locale/en-US"),
@@ -59,8 +60,9 @@ const mockSlots: SlotConfig[] = [
 const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({
   meetingType,
 }) => {
-  const [step, setStep] = useState<"date" | "time">("date");
+  const [step, setStep] = useState<"date" | "time" | "form">("date");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
+  const [selectedTime, setSelectedTime] = useState<SlotConfig | null>(null);
   const [filteredSlots, setFilteredSlots] = useState<SlotConfig[]>([]);
 
   const handleDateClick = (date: Date) => {
@@ -70,20 +72,26 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({
 
   const handleTimeClick = (time: SlotConfig) => {
     if (time.available) {
-      console.log("Selected date and time:", selectedDate, time);
+      setSelectedTime(time);
+      setStep("form");
     }
   };
 
   useEffect(() => {
     if (selectedDate) {
-      const times = mockSlots.filter((slot) => {
-        return slot.start.toDateString() === selectedDate.toDateString();
-      });
+      const times = mockSlots.filter(
+        (slot) => slot.start.toDateString() === selectedDate.toDateString(),
+      );
       setFilteredSlots(times);
     } else {
       setFilteredSlots([]);
     }
   }, [selectedDate]);
+
+  const handleFormSubmit = (event: CalendarEvent) => {
+    console.log("Event submitted:", event);
+    // Handle the form submission
+  };
 
   return (
     <div className="container mx-auto p-4">
@@ -135,6 +143,16 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({
             ))}
           </ul>
         </div>
+      )}
+      {step === "form" && selectedTime && (
+        <BookSlotForm
+          onSubmit={handleFormSubmit}
+          startTime={selectedTime.start}
+          endTime={selectedTime.end}
+          duration={Math.round(
+            (selectedTime.end.getTime() - selectedTime.start.getTime()) / 60000,
+          )}
+        />
       )}
     </div>
   );
