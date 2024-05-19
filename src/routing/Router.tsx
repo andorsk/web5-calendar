@@ -2,7 +2,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Routes, Link } from "react-router-dom";
 import CalendarView from "../screens/CalendarViewScreen";
 import BookSlotScreen from "../screens/BookSlotScreen";
-// import Configure from "../screens/ConfigureScreen";
+import SettingsScreen from "../screens/SettingsScreen";
 
 import HomeIcon from "@mui/icons-material/Home";
 import SyncIcon from "@mui/icons-material/Sync";
@@ -55,6 +55,7 @@ const Routing: React.FC = () => {
         <Routes>
           <Route path="/view" element={<CalendarView />} />
           <Route path="/book" element={<BookSlotScreen />} />
+          <Route path="/settings" element={<SettingsScreen />} />
           <Route path="/" element={<CalendarView />} />
         </Routes>
       </div>

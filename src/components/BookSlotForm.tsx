@@ -16,6 +16,8 @@ const BookSlotForm: React.FC<BookSlotFormProps> = ({
   duration,
 }) => {
   const [email, setEmail] = useState("");
+  const [did, setDID] = useState("did:dht:123456789abcdefghiJKLMN");
+
   const [name, setName] = useState("");
   const [notes, setNotes] = useState("");
 
@@ -61,6 +63,13 @@ const BookSlotForm: React.FC<BookSlotFormProps> = ({
         value={duration}
         InputLabelProps={{ shrink: true }}
         disabled
+        fullWidth
+      />
+      <TextField
+        label="DID"
+        type="did"
+        value={did}
+        onChange={(e) => setDID(e.target.value)}
         fullWidth
       />
       <TextField
