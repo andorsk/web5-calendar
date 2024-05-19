@@ -1,6 +1,6 @@
 # Web 5 Calendly
 
-Running your personally calendly should be easy, private, and simple. The no-frills calendly. It's not rocket science.
+Personal private calendar coordination. As it should be.
 
 ## Integrations 
 
