@@ -1,8 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { WorkingHours } from "../types";
-import { defaultConfig } from "../config";
+import { WorkingHours } from "../../types";
+import { defaultConfig } from "../../defaultConfig";
 
-const initialState: WorkingHours = defaultConfig.workingHours;
+const initialState: WorkingHours = defaultConfig.calendar?.workingHours;
 
 const workingHoursSlice = createSlice({
   name: "workingHours",

@@ -13,35 +13,16 @@ const ConfigureScreen: React.FC = () => {
   };
 
   const handleChange = (day: string, start: string, end: string) => {
-    setNewWorkingHours({
-      ...newWorkingHours,
-      [day]: [start, end],
-    });
+    /* setNewWorkingHours({
+     *   ...newWorkingHours,
+     *   [day]: [start, end],
+     * }); */
   };
 
   return (
     <div>
       <h1>ConfigureScreen</h1>
       <form>
-        {Object.keys(newWorkingHours).map((day) => (
-          <div key={day}>
-            <label>{day}</label>
-            <input
-              type="time"
-              value={newWorkingHours[day][0]}
-              onChange={(e) =>
-                handleChange(day, e.target.value, newWorkingHours[day][1])
-              }
-            />
-            <input
-              type="time"
-              value={newWorkingHours[day][1]}
-              onChange={(e) =>
-                handleChange(day, newWorkingHours[day][0], e.target.value)
-              }
-            />
-          </div>
-        ))}
         <button type="button" onClick={handleSave}>
           Save
         </button>

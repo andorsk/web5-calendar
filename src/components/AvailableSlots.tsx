@@ -9,11 +9,11 @@ interface AvailableSlotsProps {
 
 const AvailableSlots: React.FC<AvailableSlotsProps> = ({ selectedDay }) => {
   const workingHours = useSelector(
-    (state: RootState) => state.calendar.workingHours,
+    (state: RootState) => state.calendar.config.workingHours,
   );
   const config = useSelector((state: RootState) => state.calendar.config);
 
-  const slotDuration = config.slotDuration; // Duration of slots in minutes
+  const slotDuration = 30; //config.slotsConfig[0]; // Duration of slots in minutes
   const availableSlots = generateSlots(selectedDay, workingHours, slotDuration);
 
   return (

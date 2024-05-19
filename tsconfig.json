@@ -17,6 +17,9 @@
     "jsx": "react-jsx"
   },
   "types": ["node", "jest", "@testing-library/jest-dom"],
-
+  "baseUrl": ".",
+  "paths": {
+    "@/*": ["src/*"]
+  },
   "include": ["src"]
 }

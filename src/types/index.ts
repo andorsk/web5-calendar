@@ -14,16 +14,30 @@ export interface EventConfig {
 export interface CalendarEvent {
   id: string;
   summary: string;
+  participants: string[];
   start: { dateTime: string };
   end: { dateTime: string };
 }
 
 export interface CalendarState {
   events: CalendarEvent[];
-  config: EventConfig;
+  config: CalendarConfig;
+  slotConfig?: SlotConfig[];
+  loading: boolean;
+  error: string | null;
 }
 
 export interface CalendarConfig {
+  name?: string;
   workingHours: WorkingHours;
   googleCalendarIntegration: boolean;
 }
+
+export type SlotConfig = {
+  duration: Date;
+  name: string;
+};
+
+export type Config = {
+  calendar: CalendarConfig;
+};

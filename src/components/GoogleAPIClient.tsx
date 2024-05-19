@@ -7,6 +7,7 @@ interface GoogleApiClientProps {
 
 const GoogleApiClient: React.FC<GoogleApiClientProps> = ({ onClientInit }) => {
   useEffect(() => {
+    console.log("trying to initialize client");
     const initClient = () => {
       gapi.client
         .init({
@@ -18,7 +19,17 @@ const GoogleApiClient: React.FC<GoogleApiClientProps> = ({ onClientInit }) => {
           scope: "https://www.googleapis.com/auth/calendar.events.readonly",
         })
         .then(() => {
-          gapi.auth2.getAuthInstance().signIn().then(onClientInit);
+          console.log("initalized Client");
+          // Check if the user is already signed in
+          const authInstance = gapi.auth2.getAuthInstance();
+          if (authInstance.isSignedIn.get()) {
+            onClientInit();
+          } else {
+            authInstance.signIn().then(onClientInit);
+          }
+        })
+        .catch((error: any) => {
+          console.error("Error initializing Google API client:", error);
         });
     };
 

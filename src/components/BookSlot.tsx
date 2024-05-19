@@ -13,11 +13,11 @@ const BookSlot: React.FC = () => {
 
   const events = useSelector((state: RootState) => state.calendar.events);
   const workingHours = useSelector(
-    (state: RootState) => state.calendar.workingHours,
+    (state: RootState) => state.calendar.config.workingHours,
   );
   const config = useSelector((state: RootState) => state.calendar.config);
 
-  const slotDuration = config.slotDuration; // Duration of slots in minutes
+  const slotDuration = 30; //config.slotDuration; // Duration of slots in minutes
 
   const handleSelectMeetingType = (type: string) => {
     setSelectedMeetingType(type);
