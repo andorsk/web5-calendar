@@ -1,34 +1,26 @@
 import React, { useState } from "react";
-import GoogleApiClient from "./GoogleAPIClient";
-import LoadCalendarEvents from "./LoadCalendarEvents";
 import EventCalendar from "./EventCalendar";
 import EventList from "./EventList";
+import Settings from "./Settings";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import Button from "@mui/material/Button";
 import ButtonGroup from "@mui/material/ButtonGroup";
 import CalendarMonthIcon from "@mui/icons-material/CalendarMonth";
 import ListIcon from "@mui/icons-material/List";
+import SettingsIcon from "@mui/icons-material/Settings";
 
 const CalendarView: React.FC = () => {
-  const [isClientReady, setIsClientReady] = useState(false);
-  const [view, setView] = useState<"calendar" | "list">("list");
+  const [view, setView] = useState<"calendar" | "list" | "settings">("list");
 
   const events = useSelector((state: RootState) => state.calendar.events);
 
-  const handleClientInit = () => {
-    setIsClientReady(true);
-  };
-
-  const handleViewChange = (newView: "calendar" | "list") => {
+  const handleViewChange = (newView: "calendar" | "list" | "settings") => {
     setView(newView);
   };
 
   return (
     <div className="container mx-auto p-4">
-      <GoogleApiClient onClientInit={handleClientInit} />
-      {isClientReady && <LoadCalendarEvents />}
-
       <div className="flex justify-center mb-4">
         <ButtonGroup variant="outlined">
           <Button
@@ -55,15 +47,27 @@ const CalendarView: React.FC = () => {
           >
             Calendar View
           </Button>
+          <Button
+            startIcon={<SettingsIcon />}
+            onClick={() => handleViewChange("settings")}
+            color={view === "settings" ? "primary" : "inherit"}
+            sx={{
+              ...(view !== "settings" && {
+                backgroundColor: "#e0e0e0",
+              }),
+            }}
+          >
+            Settings
+          </Button>
         </ButtonGroup>
       </div>
 
       {view === "list" ? (
         <EventList />
+      ) : view === "calendar" ? (
+        <EventCalendar />
       ) : (
-        <div>
-          <EventCalendar />
-        </div>
+        <Settings />
       )}
     </div>
   );

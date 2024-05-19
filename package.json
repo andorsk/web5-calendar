@@ -11,6 +11,9 @@
     "@reduxjs/toolkit": "^2.2.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "@types/gapi": "^0.0.47",
+    "@types/gapi.auth2": "^0.0.60",
+    "@types/gapi.client.calendar": "^3.0.12",
     "@types/jest": "^27.5.2",
     "@types/node": "^16.18.97",
     "@types/react": "^18.3.2",
@@ -39,10 +42,17 @@
     "eject": "craco eject"
   },
   "eslintConfig": {
-    "extends": ["react-app", "react-app/jest"]
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
   "browserslist": {
-    "production": [">0.2%", "not dead", "not op_mini all"],
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",

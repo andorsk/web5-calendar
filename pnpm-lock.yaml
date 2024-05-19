@@ -26,6 +26,15 @@ dependencies:
   '@testing-library/user-event':
     specifier: ^13.5.0
     version: 13.5.0(@testing-library/dom@10.1.0)
+  '@types/gapi':
+    specifier: ^0.0.47
+    version: 0.0.47
+  '@types/gapi.auth2':
+    specifier: ^0.0.60
+    version: 0.0.60
+  '@types/gapi.client.calendar':
+    specifier: ^3.0.12
+    version: 3.0.12
   '@types/jest':
     specifier: ^27.5.2
     version: 27.5.2
@@ -2158,6 +2167,20 @@ packages:
   /@leichtgewicht/ip-codec@2.0.5:
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
 
+  /@maxim_mazurok/gapi.client.calendar-v3@0.0.20240425:
+    resolution: {integrity: sha512-+rLe+8L8u16j0ENqHbh6p/RHXdGTNx7dUtJzs5CL5w8yHmVrNNNnayL5NlWIMibd+o5Xz3Hd8eZlST3bw09s2A==}
+    dependencies:
+      '@types/gapi.client': 1.0.8
+      '@types/gapi.client.discovery-v1': 0.0.4
+    dev: false
+
+  /@maxim_mazurok/gapi.client.discovery-v1@0.1.20200806:
+    resolution: {integrity: sha512-Wl6UfmZVDdWbY3PUu8E2ULk9RPLjnMqp/iOA4tcK8Ne+U/GmlnWP/e34IaZNGArfl7iXJNOG+/3Rj9L9jQyF9Q==}
+    dependencies:
+      '@types/gapi.client': 1.0.8
+      '@types/gapi.client.discovery-v1': 0.0.4
+    dev: false
+
   /@mui/base@5.0.0-beta.40(@types/react@18.3.2)(react-dom@18.3.1)(react@18.3.1):
     resolution: {integrity: sha512-I/lGHztkCzvwlXpjD2+SNmvNQvB4227xBXhISPjEaJUXGImOQ9f3D2Yj/T3KasSI/h0MLWy74X0J6clhPmsRbQ==}
     engines: {node: '>=12.0.0'}
@@ -2889,6 +2912,33 @@ packages:
       '@types/express-serve-static-core': 4.19.0
       '@types/qs': 6.9.15
       '@types/serve-static': 1.15.7
+
+  /@types/gapi.auth2@0.0.60:
+    resolution: {integrity: sha512-KQiyTHRyAcat6marTRAixrkHhkS7mqclcbQvInfxyp7IeUDSUzLBlgH1s0SFaLl1m1jRY6b+qh4NMlmVm0wPEw==}
+    dependencies:
+      '@types/gapi': 0.0.47
+    dev: false
+
+  /@types/gapi.client.calendar@3.0.12:
+    resolution: {integrity: sha512-3H4hubmAuOkYHGSoVkxYAz6zg2g5LhQ1Y0/GLDIt1AkebKZgGiK+5JNFq4Nn2qDkjFh8pMY3TLIC/J5ueMd6YA==}
+    deprecated: use @types/gapi.client.calendar-v3 instead; see https://github.com/Maxim-Mazurok/google-api-typings-generator/issues/652 for details
+    dependencies:
+      '@maxim_mazurok/gapi.client.calendar-v3': 0.0.20240425
+    dev: false
+
+  /@types/gapi.client.discovery-v1@0.0.4:
+    resolution: {integrity: sha512-uevhRumNE65F5mf2gABLaReOmbFSXONuzFZjNR3dYv6BmkHg+wciubHrfBAsp3554zNo3Dcg6dUAlwMqQfpwjQ==}
+    dependencies:
+      '@maxim_mazurok/gapi.client.discovery-v1': 0.1.20200806
+    dev: false
+
+  /@types/gapi.client@1.0.8:
+    resolution: {integrity: sha512-qJQUmmumbYym3Amax0S8CVzuSngcXsC1fJdwRS2zeW5lM63zXkw4wJFP+bG0jzgi0R6EsJKoHnGNVTDbOyG1ng==}
+    dev: false
+
+  /@types/gapi@0.0.47:
+    resolution: {integrity: sha512-/ZsLuq6BffMgbKMtZyDZ8vwQvTyKhKQ1G2K6VyWCgtHHhfSSXbk4+4JwImZiTjWNXfI2q1ZStAwFFHSkNoTkHA==}
+    dev: false
 
   /@types/graceful-fs@4.1.9:
     resolution: {integrity: sha512-olP3sd1qOEe5dXTSaFvQG+02VdRXcdytWLAZsAq1PecU8uqQAhkrnbli7DagjtXKW/Bl7YJbUsa8MPcuc8LHEQ==}
