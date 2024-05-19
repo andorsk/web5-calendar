@@ -1,23 +1,6 @@
-// config.ts
-export interface DailyHours {
-  start: string;
-  end: string;
-}
+import { CalendarConfig } from "./types";
 
-export interface Config {
-  workingHours: {
-    Monday: DailyHours[];
-    Tuesday: DailyHours[];
-    Wednesday: DailyHours[];
-    Thursday: DailyHours[];
-    Friday: DailyHours[];
-    Saturday: DailyHours[];
-    Sunday: DailyHours[];
-  };
-  googleCalendarIntegration: boolean;
-}
-
-export const defaultConfig: Config = {
+export const defaultConfig: CalendarConfig = {
   workingHours: {
     Monday: [
       { start: "9:00", end: "12:00" },

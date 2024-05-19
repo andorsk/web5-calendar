@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { generateSlots } from "../lib/calendarUtils";
 
 interface AvailableSlotsProps {
   selectedDay: string;
@@ -13,40 +14,7 @@ const AvailableSlots: React.FC<AvailableSlotsProps> = ({ selectedDay }) => {
   const config = useSelector((state: RootState) => state.calendar.config);
 
   const slotDuration = config.slotDuration; // Duration of slots in minutes
-
-  const getWorkingHours = (day: string): [string, string] => {
-    return workingHours[day];
-  };
-
-  const generateSlots = (day: string): string[] => {
-    const [startHour, endHour] = getWorkingHours(day);
-    const start = new Date();
-    const end = new Date();
-    start.setHours(
-      parseInt(startHour.split(":")[0]),
-      parseInt(startHour.split(":")[1]),
-      0,
-      0,
-    );
-    end.setHours(
-      parseInt(endHour.split(":")[0]),
-      parseInt(endHour.split(":")[1]),
-      0,
-      0,
-    );
-
-    const slots: string[] = [];
-    while (start < end) {
-      const slotStart = new Date(start);
-      start.setMinutes(start.getMinutes() + slotDuration);
-      slots.push(
-        `${slotStart.toLocaleTimeString()} - ${start.toLocaleTimeString()}`,
-      );
-    }
-    return slots;
-  };
-
-  const availableSlots = generateSlots(selectedDay);
+  const availableSlots = generateSlots(selectedDay, workingHours, slotDuration);
 
   return (
     <div>

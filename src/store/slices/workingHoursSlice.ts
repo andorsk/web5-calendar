@@ -1,16 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { WorkingHours } from "../types";
+import { defaultConfig } from "../config";
 
-interface WorkingHours {
-  [key: string]: [string, string];
-}
-
-const initialState: WorkingHours = {
-  Monday: ["09:00", "17:00"],
-  Tuesday: ["09:00", "17:00"],
-  Wednesday: ["09:00", "17:00"],
-  Thursday: ["09:00", "17:00"],
-  Friday: ["09:00", "17:00"],
-};
+const initialState: WorkingHours = defaultConfig.workingHours;
 
 const workingHoursSlice = createSlice({
   name: "workingHours",
