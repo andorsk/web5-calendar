@@ -36,6 +36,9 @@ export interface CalendarConfig {
 export type SlotConfig = {
   duration: Date;
   name: string;
+  start: Date;
+  end: Date;
+  available: boolean;
 };
 
 export type Config = {
