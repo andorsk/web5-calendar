@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 import { TextField, Button, Box, Typography } from "@mui/material";
-// import { v4 as uuidv4 } from "uuid"; // To generate unique IDs for events
 import { CalendarEvent } from "../types";
 
 type BookSlotFormProps = {
   onSubmit: (event: CalendarEvent) => void;
-  startTime: string;
-  endTime: string;
+  startTime: Date;
+  endTime: Date;
   duration: number;
 };
 
@@ -44,16 +43,14 @@ const BookSlotForm: React.FC<BookSlotFormProps> = ({
       <Typography variant="h6">Book a Slot</Typography>
       <TextField
         label="Start Time"
-        type="datetime-local"
-        value={startTime}
+        value={new Date(startTime).toLocaleString()}
         InputLabelProps={{ shrink: true }}
         disabled
         fullWidth
       />
       <TextField
         label="End Time"
-        type="datetime-local"
-        value={endTime}
+        value={new Date(endTime).toLocaleString()}
         InputLabelProps={{ shrink: true }}
         disabled
         fullWidth
