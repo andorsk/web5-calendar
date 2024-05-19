@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import CalendarView from "../screens/CalendarView";
-import Book from "../screens/BookSlot";
+import CalendarView from "../screens/CalendarViewScreen";
+import Book from "../screens/BookSlotScreen";
 import Configure from "../screens/ConfigureScreen";
 
 const Routing: React.FC = () => {

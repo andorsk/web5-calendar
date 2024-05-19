@@ -1,8 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import MeetingType from "./MeetingType";
+import Calendar from "./Calendar";
+import AvailableSlots from "./AvailableSlots";
 
 const BookSlot: React.FC = () => {
+  const [step, setStep] = useState<"type" | "calendar" | "slots">("type");
+  const [selectedMeetingType, setSelectedMeetingType] = useState<string>("");
+  const [selectedDay, setSelectedDay] = useState<string>("");
+
   const events = useSelector((state: RootState) => state.calendar.events);
   const workingHours = useSelector(
     (state: RootState) => state.calendar.workingHours,
@@ -43,23 +50,22 @@ const BookSlot: React.FC = () => {
     return slots;
   };
 
-  const availableSlots = () => {
-    const slots: string[] = [];
-    const days = Object.keys(workingHours);
-    days.forEach((day) => {
-      slots.push(...generateSlots(day));
-    });
-    return slots;
+  const handleSelectMeetingType = (type: string) => {
+    setSelectedMeetingType(type);
+    setStep("calendar");
+  };
+
+  const handleSelectDay = (day: string) => {
+    setSelectedDay(day);
+    setStep("slots");
   };
 
   return (
     <div>
       <h1>Book a Slot</h1>
-      <ul>
-        {availableSlots().map((slot, index) => (
-          <li key={index}>{slot}</li>
-        ))}
-      </ul>
+      {step === "type" && <MeetingType onSelect={handleSelectMeetingType} />}
+      {step === "calendar" && <Calendar onSelectDay={handleSelectDay} />}
+      {step === "slots" && <AvailableSlots selectedDay={selectedDay} />}
     </div>
   );
 };
