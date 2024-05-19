@@ -6,13 +6,12 @@ import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./index.css";
-import { SlotConfig } from "../types";
+import { EventType, SlotConfig } from "../types";
 import {
-  Button,
-  Select,
-  MenuItem,
   FormControl,
   InputLabel,
+  Select,
+  MenuItem,
   SelectChangeEvent,
 } from "@mui/material";
 
@@ -28,62 +27,41 @@ const localizer = dateFnsLocalizer({
   locales,
 });
 
+type DateTimeSelectionProps = {
+  meetingType: EventType;
+};
+
 // Mock slots
 const mockSlots: SlotConfig[] = [
   {
     name: "Slot 1",
-    duration: new Date(2024, 4, 19, 1, 0),
+    duration: new Date(0, 0, 0, 0, 30),
     start: new Date(2024, 4, 19, 10, 0),
     end: new Date(2024, 4, 19, 10, 30),
     available: true,
   },
   {
     name: "Slot 2",
-    duration: new Date(2024, 4, 19, 1, 0),
+    duration: new Date(0, 0, 0, 0, 30),
     start: new Date(2024, 4, 19, 11, 0),
     end: new Date(2024, 4, 19, 11, 30),
     available: false,
   },
   {
     name: "Slot 3",
-    duration: new Date(2024, 4, 19, 1, 0),
+    duration: new Date(0, 0, 0, 0, 30),
     start: new Date(2024, 4, 19, 12, 0),
     end: new Date(2024, 4, 19, 12, 30),
     available: true,
   },
 ];
 
-const meetingTypes: SlotConfig[] = [
-  {
-    name: "Type 1",
-    duration: new Date(2024, 4, 19, 1, 0),
-    start: new Date(),
-    end: new Date(),
-    available: true,
-  }, // Add actual duration
-  {
-    name: "Type 2",
-    duration: new Date(2024, 4, 19, 1, 0),
-    start: new Date(),
-    end: new Date(),
-    available: true,
-  },
-];
-
-const DateTimeSelection: React.FC = () => {
-  const [step, setStep] = useState<"type" | "date" | "time">("type");
-  const [selectedMeetingType, setSelectedMeetingType] =
-    useState<SlotConfig | null>(null);
+const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({
+  meetingType,
+}) => {
+  const [step, setStep] = useState<"date" | "time">("date");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [filteredSlots, setFilteredSlots] = useState<SlotConfig[]>([]);
-
-  const handleMeetingTypeChange = (event: SelectChangeEvent<string>) => {
-    const meetingType = meetingTypes.find(
-      (type) => type.name === event.target.value,
-    );
-    setSelectedMeetingType(meetingType || null);
-    setStep("date");
-  };
 
   const handleDateClick = (date: Date) => {
     setSelectedDate(date);
@@ -99,13 +77,8 @@ const DateTimeSelection: React.FC = () => {
   useEffect(() => {
     if (selectedDate) {
       const times = mockSlots.filter((slot) => {
-        console.log(
-          `Comparing slot.start: ${slot.start.toDateString()} with selectedDate: ${selectedDate.toDateString()}`,
-        );
         return slot.start.toDateString() === selectedDate.toDateString();
       });
-
-      console.log("setting times", times);
       setFilteredSlots(times);
     } else {
       setFilteredSlots([]);
@@ -114,25 +87,9 @@ const DateTimeSelection: React.FC = () => {
 
   return (
     <div className="container mx-auto p-4">
-      {step === "type" && (
-        <div>
-          <h2 className="text-2xl font-semibold mb-4">Select Meeting Type</h2>
-          <FormControl fullWidth>
-            <InputLabel id="meeting-type-label">Meeting Type</InputLabel>
-            <Select
-              labelId="meeting-type-label"
-              value={selectedMeetingType?.name || ""}
-              onChange={handleMeetingTypeChange}
-            >
-              {meetingTypes.map((type) => (
-                <MenuItem key={type.name} value={type.name}>
-                  {type.name}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </div>
-      )}
+      <h2 className="text-2xl font-semibold mb-4">
+        Selected Meeting Type: {meetingType.name}
+      </h2>
       {step === "date" && (
         <div>
           <h2 className="text-2xl font-semibold mb-4">Select a Date</h2>

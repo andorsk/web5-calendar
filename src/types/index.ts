@@ -44,3 +44,9 @@ export type SlotConfig = {
 export type Config = {
   calendar: CalendarConfig;
 };
+
+export type EventType = {
+  name: string;
+  duration: Date;
+  description?: string;
+};

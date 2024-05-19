@@ -1,20 +1,47 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import MeetingType from "./MeetingType";
-import Calendar from "./Calendar";
-import AvailableSlots from "./AvailableSlots";
-import { generateSlots } from "../lib/calendarUtils";
-import BookSlotForm from "./BookSlotForm";
-import { CalendarEvent } from "../types";
+import EventTypeCard from "./EventTypeCard";
 import DateTimeSelection from "./DateTimeSelection";
+import { EventType } from "../types";
+
+const meetingTypes: EventType[] = [
+  {
+    name: "Type 1",
+    duration: new Date(30 * 60 * 1000),
+    description: "Quick meeting",
+  },
+  {
+    name: "Type 2",
+    duration: new Date(30 * 60 * 1000),
+    description: "Longer Meeting",
+  },
+];
 
 const BookSlot: React.FC = () => {
-  console.log("booking a slot");
-  const handleSlotBooking = () => {};
+  const [selectedMeetingType, setSelectedMeetingType] =
+    useState<EventType | null>(null);
+
+  const handleMeetingTypeSelect = (eventType: EventType) => {
+    console.log("setting type");
+    setSelectedMeetingType(eventType);
+  };
+
   return (
     <div>
-      <DateTimeSelection />
+      {!selectedMeetingType ? (
+        <div>
+          {meetingTypes.map((type) => (
+            <EventTypeCard
+              key={type.name}
+              eventType={type}
+              onSelect={handleMeetingTypeSelect}
+            />
+          ))}
+        </div>
+      ) : (
+        <div>
+          <DateTimeSelection meetingType={selectedMeetingType} />
+        </div>
+      )}
     </div>
   );
 };
