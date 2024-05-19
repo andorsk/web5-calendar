@@ -2,6 +2,11 @@
 
 Personal private calendar coordination. As it should be.
 
+## State
+
+WIP: Nothing is live yet. 
+
+
 ## Integrations 
 
 - Google Calendar

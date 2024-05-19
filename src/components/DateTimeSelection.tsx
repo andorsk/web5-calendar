@@ -9,7 +9,6 @@ import "./index.css";
 import { EventType, CalendarEvent, SlotConfig } from "../types";
 import { defaultConfig } from "../defaultConfig";
 import { generateSlots } from "../lib/calendarUtils";
-
 import {
   FormControl,
   InputLabel,
