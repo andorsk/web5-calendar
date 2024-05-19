@@ -22,7 +22,7 @@ const EventCalendar: React.FC = () => {
 
   const formattedEvents = events.map((event) => ({
     id: event.id,
-    title: "(hidden)", //event.summary,
+    title: event.summary,
     start: new Date(event.start.dateTime),
     end: new Date(event.end.dateTime),
   }));
