@@ -17,6 +17,7 @@ export interface CalendarEvent {
   participants: string[];
   start: { dateTime: Date };
   end: { dateTime: Date };
+  referenceURL?: string;
 }
 
 export interface CalendarState {

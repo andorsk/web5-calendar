@@ -94,6 +94,7 @@ const Settings: React.FC = () => {
             item.attendees?.map((attendee: any) => attendee.email) || [],
           start: { dateTime: item.start.dateTime },
           end: { dateTime: item.end.dateTime },
+          referenceURL: item.htmlLink, // Include the link
         }));
         console.log("events", events);
         dispatch(setEvents(events));
