@@ -1,13 +1,15 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
+import { CalendarEvent } from "../types";
 
 const EventList: React.FC = () => {
   const events = useSelector((state: RootState) => state.calendar.events);
 
-  const handleEventClick = (eventId: string) => {
-    // Handle event click
-    console.log("Event clicked:", eventId);
+  const handleEventClick = (event: CalendarEvent) => {
+    if (event.referenceURL) {
+      window.open(event.referenceURL, "_blank", "noopener,noreferrer");
+    }
   };
 
   return (
@@ -17,7 +19,7 @@ const EventList: React.FC = () => {
           <li
             key={event.id}
             className="event-item p-4 bg-white rounded shadow-md hover:bg-blue-50 cursor-pointer"
-            onClick={() => handleEventClick(event.id)}
+            onClick={() => handleEventClick(event)}
           >
             <div className="event-summary text-lg font-semibold text-gray-800">
               {event.summary}
