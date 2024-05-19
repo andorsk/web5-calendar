@@ -7,6 +7,9 @@ import getDay from "date-fns/getDay";
 import "react-big-calendar/lib/css/react-big-calendar.css";
 import "./index.css";
 import { EventType, CalendarEvent, SlotConfig } from "../types";
+import { defaultConfig } from "../defaultConfig";
+import { generateSlots } from "../lib/calendarUtils";
+
 import {
   FormControl,
   InputLabel,
@@ -32,31 +35,6 @@ type DateTimeSelectionProps = {
   meetingType: EventType;
 };
 
-// Mock slots
-const mockSlots: SlotConfig[] = [
-  {
-    name: "Slot 1",
-    duration: new Date(0, 0, 0, 0, 30),
-    start: new Date(2024, 4, 19, 10, 0),
-    end: new Date(2024, 4, 19, 10, 30),
-    available: true,
-  },
-  {
-    name: "Slot 2",
-    duration: new Date(0, 0, 0, 0, 30),
-    start: new Date(2024, 4, 19, 11, 0),
-    end: new Date(2024, 4, 19, 11, 30),
-    available: false,
-  },
-  {
-    name: "Slot 3",
-    duration: new Date(0, 0, 0, 0, 30),
-    start: new Date(2024, 4, 19, 12, 0),
-    end: new Date(2024, 4, 19, 12, 30),
-    available: true,
-  },
-];
-
 const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({
   meetingType,
 }) => {
@@ -78,6 +56,26 @@ const DateTimeSelection: React.FC<DateTimeSelectionProps> = ({
   };
 
   useEffect(() => {
+    const unavailableSlots: CalendarEvent[] = [
+      {
+        id: "1",
+        summary: "Meeting",
+        participants: ["Alice", "Bob"],
+        start: { dateTime: new Date("2024-05-20T11:00:00") },
+        end: { dateTime: new Date("2024-05-20T11:30:00") },
+      },
+    ];
+
+    const mockSlots = generateSlots(
+      "Monday",
+      "2024-05-20", // Specific date for Monday
+      defaultConfig.calendar.workingHours,
+      15, // step in minutes
+      30, // slot duration in minutes
+      unavailableSlots,
+    );
+
+    console.log("mock lost", mockSlots);
     if (selectedDate) {
       const times = mockSlots.filter(
         (slot) => slot.start.toDateString() === selectedDate.toDateString(),
