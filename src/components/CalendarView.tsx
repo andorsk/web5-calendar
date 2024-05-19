@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import GoogleApiClient from "./GoogleAPIClient";
 import LoadCalendarEvents from "./LoadCalendarEvents";
+import EventCalendar from "./EventCalendar";
 import EventList from "./EventList";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
@@ -61,8 +62,7 @@ const CalendarView: React.FC = () => {
         <EventList />
       ) : (
         <div>
-          {/* Placeholder for calendar view component */}
-          <p>Calendar view not implemented yet.</p>
+          <EventCalendar />
         </div>
       )}
     </div>
