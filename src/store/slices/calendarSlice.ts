@@ -1,5 +1,11 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CalendarState, CalendarEvent, CalendarConfig } from "../../types";
+import {
+  fetchEvents,
+  addNewEvent,
+  updateExistingEvent,
+  deleteExistingEvent,
+} from "../thunks/calendar";
 
 // Improved initialState with additional configurations and states
 const initialState: CalendarState = {
@@ -20,7 +26,6 @@ const calendarSlice = createSlice({
   initialState,
   reducers: {
     setEvents(state, action: PayloadAction<CalendarEvent[]>) {
-      console.log("setting events", action.payload);
       state.events = action.payload;
     },
     addEvent(state, action: PayloadAction<CalendarEvent>) {
@@ -48,6 +53,57 @@ const calendarSlice = createSlice({
     setError(state, action: PayloadAction<string | null>) {
       state.error = action.payload;
     },
+  },
+  extraReducers: (builder) => {
+    builder
+      .addCase(fetchEvents.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchEvents.fulfilled, (state, action) => {
+        state.loading = false;
+        state.events = action.payload;
+      })
+      .addCase(fetchEvents.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(addNewEvent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addNewEvent.fulfilled, (state, action) => {
+        state.loading = false;
+        // Handle successful addition of the event (e.g., fetch the events again)
+      })
+      .addCase(addNewEvent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(updateExistingEvent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(updateExistingEvent.fulfilled, (state) => {
+        state.loading = false;
+        // Handle successful update of the event (e.g., fetch the events again)
+      })
+      .addCase(updateExistingEvent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      })
+      .addCase(deleteExistingEvent.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(deleteExistingEvent.fulfilled, (state) => {
+        state.loading = false;
+        // Handle successful deletion of the event (e.g., fetch the events again)
+      })
+      .addCase(deleteExistingEvent.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload as string;
+      });
   },
 });
 
