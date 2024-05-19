@@ -8,8 +8,8 @@ Running your personally calendly should be easy, private, and simple. The no-fri
 
 ## Screenshots
 
-### Calendar
+### Integrate with Other Calendar
 ![Calendar](./public/calendar.png)
 
-### Book
+### Choose a Booking Time
 ![Book](./public/book.png)
